@@ -33,6 +33,10 @@ int GetNumOfWords(string text) {
 }
 
 int FindText(string find, string text) {
+    
+    for (int index = 0; index < text.length(); index++) {
+
+    }
     return 0;
 }
 
