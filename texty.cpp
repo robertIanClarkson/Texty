@@ -2,6 +2,10 @@
 #include <string>
 using namespace std;
 
+// OUT & IN for GetNumOfWords()
+#define OUT 0
+#define IN 1
+
 int GetNumOfNonWSCharacters(string text) {
     int sum = 0;
     for (int i = 0; i < text.length(); i++) {
@@ -13,13 +17,19 @@ int GetNumOfNonWSCharacters(string text) {
 }
 
 int GetNumOfWords(string text) {
-    int sum = 0;
-    for (int i = 0; i < text.length(); i++) {
-        if (text.at(i) == ' ') {
-            sum++;
+    int state = OUT;
+    char current;
+    int count = 0;
+    for (int index = 0; index < text.length(); index++) {
+        current = text.at( index );
+        if ( (current == ' ') || (current == '\n') || (current == '\t') ) {
+            state = OUT;
+        } else if (state == OUT) {
+            state = IN;
+            count += 1;
         }
     }
-    return sum;
+    return count;
 }
 
 int FindText(string find, string text) {
