@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <string>
 using namespace std;
 
@@ -33,11 +34,19 @@ int GetNumOfWords(string text) {
 }
 
 int FindText(string find, string text) {
-    
-    for (int index = 0; index < text.length(); index++) {
-
+    char currentTextChar;
+    string buffer = "";
+    int findCount = 0;
+    for( int index = 0; index <= ( text.length() - find.length() ); index++ ) {
+        currentTextChar = text.at( index );
+        if( currentTextChar == find.at( 0 ) ) {
+                buffer = text.substr( index, find.length() );
+            if( buffer == find ) {
+                findCount += 1;
+            }
+        }
     }
-    return 0;
+    return findCount;
 }
 
 void ReplaceExclamation(string &text) {
