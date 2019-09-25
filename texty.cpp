@@ -50,7 +50,13 @@ int FindText(string find, string text) {
 }
 
 void ReplaceExclamation(string &text) {
-
+    char current;
+    for( int index = 0; index < text.length(); index++ ) {
+        current = text.at( index );
+        if( current == '!' ) {
+            text.at(index) = '.';
+        }
+    }
 }
 
 void ShortenSpace(string &text) {
