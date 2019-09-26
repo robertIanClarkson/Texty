@@ -7,25 +7,25 @@ using namespace std;
 #define OUT 0
 #define IN 1
 
-int GetNumOfNonWSCharacters(string text) {
+int GetNumOfNonWSCharacters( string text ) {
     int sum = 0;
-    for (int i = 0; i < text.length(); i++) {
-        if (text.at(i) != ' ') {
+    for ( unsigned int index = 0; index < text.length(); index++ ) {
+        if ( text.at( index ) != ' ' ) {
             sum++;
         }
     }
     return sum;
 }
 
-int GetNumOfWords(string text) {
+int GetNumOfWords( string text ) {
     int state = OUT;
     char current;
     int count = 0;
-    for (int index = 0; index < text.length(); index++) {
+    for ( unsigned int index = 0; index < text.length(); index++ ) {
         current = text.at( index );
-        if ( (current == ' ') || (current == '\n') || (current == '\t') ) {
+        if ( ( current == ' ' ) || ( current == '\n' ) || ( current == '\t' ) ) {
             state = OUT;
-        } else if (state == OUT) {
+        } else if ( state == OUT ) {
             state = IN;
             count += 1;
         }
@@ -33,15 +33,15 @@ int GetNumOfWords(string text) {
     return count;
 }
 
-int FindText(string find, string text) {
+int FindText( string find, string text ) {
     char currentTextChar;
     string buffer = "";
     int findCount = 0;
-    for( int index = 0; index <= ( text.length() - find.length() ); index++ ) {
+    for ( unsigned int index = 0; index <= ( text.length() - find.length() ); index++ ) {
         currentTextChar = text.at( index );
-        if( currentTextChar == find.at( 0 ) ) {
+        if ( currentTextChar == find.at( 0 ) ) {
                 buffer = text.substr( index, find.length() );
-            if( buffer == find ) {
+            if ( buffer == find ) {
                 findCount += 1;
             }
         }
@@ -49,35 +49,35 @@ int FindText(string find, string text) {
     return findCount;
 }
 
-void ReplaceExclamation(string &text) {
+void ReplaceExclamation( string &text ) {
     char current;
-    for( int index = 0; index < text.length(); index++ ) {
+    for ( unsigned int index = 0; index < text.length(); index++ ) {
         current = text.at( index );
-        if( current == '!' ) {
-            text.at(index) = '.';
+        if ( current == '!' ) {
+            text.at( index ) = '.';
         }
     }
 }
 
-void ShortenSpace(string &text) {
+void ShortenSpace( string &text ) {
     char current;
     char next;
-    for( int index = 0; index < ( text.length() - 1 ); index++ ) {
+    for ( unsigned int index = 0; index < ( text.length() - 1 ); index++ ) {
         current = text.at( index );
         next = text.at( index + 1 );
-        if( current == ' ' ) {
-            if( next == ' ' ) {
-                text.erase(text.begin() + index);
+        if ( current == ' ' ) {
+            if ( next == ' ' ) {
+                text.erase( text.begin() + index );
                 index -= 1;
             }
         }
     }
 }
 
-void PrintMenu(string &text) {
+void PrintMenu( string &text ) {
     string pick;
     int result;
-    while (pick != "q") {
+    while ( pick != "q" ) {
         cout << "MENU" << endl;
         cout << "c - Number of non-whitespace characters" << endl;
         cout << "w - Number of words" << endl;
@@ -88,23 +88,23 @@ void PrintMenu(string &text) {
         cout << "Choose an option: ";
         cin >> pick;
 
-        if (pick == "c") { // Number of non-whitespace characters
-            result = GetNumOfNonWSCharacters(text);
+        if ( pick == "c" ) { // Number of non-whitespace characters
+            result = GetNumOfNonWSCharacters( text );
             cout << endl << "Number of non-whitespace characters: " << result << endl << endl;
-        } else if (pick == "w") { // Number of words
-            result = GetNumOfWords(text);
+        } else if ( pick == "w" ) { // Number of words
+            result = GetNumOfWords( text );
             cout << endl << "Number of words: " << result << endl << endl;
-        } else if (pick == "f") { // Find text
+        } else if ( pick == "f" ) { // Find text
             string find;
             cout << "Enter a word or phrase to be found: ";
             cin >> find;
-            result = FindText(find, text);
+            result = FindText( find, text );
             cout << endl << "\'" << find << "\' instances: " << result << endl << endl;
-        } else if (pick == "r") { // Replace all !'s
-            ReplaceExclamation(text);
+        } else if ( pick == "r" ) { // Replace all !'s
+            ReplaceExclamation( text );
             cout << endl << "Edited text: " << text << endl << endl;
-        } else if (pick == "s") { // Shorten spaces
-            ShortenSpace(text);
+        } else if ( pick == "s" ) { // Shorten spaces
+            ShortenSpace( text );
             cout << endl << "Edited text: " << text << endl << endl;
         }
     }
@@ -113,9 +113,9 @@ void PrintMenu(string &text) {
 int main() {
     string text;
     cout << "Enter a sample text:" << endl;
-    getline (cin, text);
+    getline ( cin, text );
     cout << endl << "You entered: " << text << endl << endl;
-    PrintMenu(text);
+    PrintMenu( text );
 
     return 0;
 }
