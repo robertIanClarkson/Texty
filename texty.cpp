@@ -60,7 +60,18 @@ void ReplaceExclamation(string &text) {
 }
 
 void ShortenSpace(string &text) {
-
+    char current;
+    char next;
+    for( int index = 0; index < ( text.length() - 1 ); index++ ) {
+        current = text.at( index );
+        next = text.at( index + 1 );
+        if( current == ' ' ) {
+            if( next == ' ' ) {
+                text.erase(text.begin() + index);
+                index -= 1;
+            }
+        }
+    }
 }
 
 void PrintMenu(string &text) {
